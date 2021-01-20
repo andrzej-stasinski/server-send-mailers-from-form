@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello email</title>
+</head>
+<body>
+
+    <!-- <form 
+        class="contact-form"
+        action="message"
+        method="get"
+    > -->
+    <form 
+        class="contact-form"
+    >
+        <input type="email" name="email" 
+            class="contact-form__input contact-form__input--email"
+            placeholder="E-mail"
+        >
+        <input type="message" name="message" 
+            class="contact-form__message contact-form__message--message"
+            placeholder="Message"
+        >
+        <button class="contact-form__button">SEND</button>
+    </form>
+
+    <script>
+       
+        const button = document.querySelector('.contact-form__button')
+
+        const sendEmail = (e) => {
+            e.preventDefault()
+            const emailInput = document.querySelector('.contact-form__input')
+            const messageInput = document.querySelector('.contact-form__message')
+
+            const email   = emailInput.value
+            const message = messageInput.value
+
+            console.log('EMAIL', email, message)
+            fetch(`/message?message=${message}&email=${email}`)
+            .then((response) => {
+                console.log(response)
+                if(response.status !== 200) throw new Error(err)
+                console.log('message send')
+            })
+            .catch((err) => console.log('message NOT send', err))
+        }
+
+        button.addEventListener('click', sendEmail)
+
+    </script>
+    
+</body>
+</html>
