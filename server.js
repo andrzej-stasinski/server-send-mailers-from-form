@@ -27,7 +27,7 @@ app.get('/message', (req, res) => {
     console.log(message +' '+ email)
     if(!message) res.status(400)
     if(!email) res.status(400)
-    // res.send('<h1>Server:</h1>'+email+'<br/>'+SUBJECT+'<br/>'+message+' '+process.env.SMTP_PASSWORD)
+    res.send( '<h1>Server:</h1>'+email+'<br/>'+SUBJECT+'<br/>'+message )
     transporter.sendMail({
         from: "andisyy@gmail.com",
         to: email,
@@ -36,7 +36,11 @@ app.get('/message', (req, res) => {
         // html: "<p>HTML version of the message</p>"
     },
     (err, info) => {
-      if(err) return res.status(500).send()
+      if(err) {
+        console.log('err', err)
+        return res.status(500).send()
+      }
+      console.log('info', info)
       res.status(200).send(info)
     })
 })
