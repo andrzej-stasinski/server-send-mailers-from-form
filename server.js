@@ -30,7 +30,7 @@ app.get('/message', (req, res) => {
     console.log('message & email ', message, email)
     if(!message) res.status(400)
     if(!email) res.status(400)
-    res.send( '<h1>Server:</h1>'+email+'<br/>'+SUBJECT+'<br/>'+message )
+    res.send( '<h2>Info form Server OVH:</h2>to: '+email+'<br/>subject: '+SUBJECT+'<br/>message: '+message )
     transporter.sendMail({
         from: "andisyy@gmail.com",
         to: email,
